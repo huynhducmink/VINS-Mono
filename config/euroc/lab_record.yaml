@@ -13,15 +13,15 @@ camera_name: camera
 image_width: 640
 image_height: 480
 distortion_parameters:
-   k1: -2.917e-01
-   k2: 8.228e-02
-   p1: 5.333e-05
-   p2: -1.578e-04
+   k1: 0
+   k2: 0
+   p1: 0
+   p2: 0
 projection_parameters:
-   fx: 4.616e+02
-   fy: 4.603e+02
-   cx: 3.630e+02
-   cy: 2.481e+02
+   fx: 423.8321838378906
+   fy: 417.2456970214844
+   cx: 423.8321838378906
+   cy: 238.10243225097656
 
 # Extrinsic parameter between IMU and Camera.
 estimate_extrinsic: 2   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
