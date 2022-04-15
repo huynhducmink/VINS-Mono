@@ -552,7 +552,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 100
       Name: Flightgoogles_Odometry
       Position Tolerance: 0.10000000149011612
@@ -569,7 +569,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /ground_truth_flightgoogles_odo
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -644,7 +644,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 9.963531494140625
+      Distance: 4.180365562438965
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -660,9 +660,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5847969651222229
+      Pitch: 0.3997969925403595
       Target Frame: <Fixed Frame>
-      Yaw: 3.617220401763916
+      Yaw: 1.5622261762619019
     Saved: ~
 Window Geometry:
   Displays:
