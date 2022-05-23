@@ -243,6 +243,7 @@ bool Estimator::initialStructure()
         if(var < 0.25)
         {
             ROS_INFO("IMU excitation not enouth!");
+            ROS_INFO("IMU variation %f!", var);
             //return false;
         }
     }

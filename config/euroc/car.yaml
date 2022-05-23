@@ -3,34 +3,28 @@
 # Config file for flightgoogles simulation
 
 #common parameters
-imu_topic: "/uav/sensors/imu"
-image_topic: "/uav/camera/left_rgb_blurred/image_rect_color"
+imu_topic: "/imu0"
+image_topic: "/cam0/image_raw"
 output_path: "/home/huynhmink/vins_mono_output/"
 
 #camera calibration 
-model_type: PINHOLE
+model_type: MEI
 camera_name: camera
-image_width: 640
+image_width: 752
 image_height: 480
+mirror_parameters:
+   xi: 1.8162816904697401e+00
 distortion_parameters:
-   k1: 0
-   k2: 0
-   p1: 0
-   p2: 0
-   #k1: -2.917e-01
-   #k2: 8.228e-02
-   #p1: 5.333e-05
-   #p2: -1.578e-04
+   k1: -5.2280966938007600e-02
+   k2: 5.3709501857137787e-01
+   p1: -3.5867321540317175e-04
+   p2: -2.5596838136604099e-04
 projection_parameters:
-  #   fx: 4.616e+02
-  #   fy: 4.603e+02
-  #   cx: 3.630e+02
-  #   cy: 2.481e+02
-   fx: 4.156921997070312500e+02 
-   fy: 4.156921997070312500e+02 
-   cx: 3.200000000000000000e+02
-   cy: 2.400000000000000000e+02
-  #luc truoc loi o day dien sai @HIEU
+   gamma1: 1.3217792921289520e+03
+   gamma2: 1.3237233061481388e+03
+   u0: 3.5263371410695777e+02
+   v0: 2.2968716966022129e+02
+
 
 # Extrinsic parameter between IMU and Camera.
 estimate_extrinsic: 1   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
@@ -42,27 +36,22 @@ extrinsicRotation: !!opencv-matrix
    rows: 3
    cols: 3
    dt: d
-     #data: [0, 0, 1,
-     #  -1, 0, 0, 
-     #      0 , -1, 0]
-   data: [ 6.6583787060477961e-03, 1.2028980270777201e-02,
-       9.9990548034634386e-01, -9.9997712766950864e-01,
-       -1.1073344810823560e-03, 6.6721771699110866e-03,
-       1.1874893037505108e-03, -9.9992703606012812e-01,
-       1.2021332087635450e-02 ]
+   data: [ 9.9991036582958637e-01, 1.1948793070511360e-02, -6.0404180899061577e-03,
+       -1.1931508793228868e-02, 9.9992464233075007e-01, 2.8894216789357523e-03,
+       6.0744879998126597e-03, -2.8170913864660921e-03, 9.9997758204454790e-01]
 #Translation from camera frame to imu frame, imu^T_cam
 extrinsicTranslation: !!opencv-matrix
    rows: 3
    cols: 1
    dt: d
      #data: [0,-0.05,0]
-   data: [ 4.5858336696074104e-03, 4.3543990976669542e-02,
-       5.3919200319432203e-02 ]
+   data: [ 3.8836925129605959e-02, -4.7406823518464092e-03,
+       -3.5997702822723361e-03 ]
 
 #feature traker paprameters
-max_cnt: 100            # max feature number in feature tracking
+max_cnt: 200            # max feature number in feature tracking
 min_dist: 30            # min distance between two features 
-freq: 10                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
+freq: 0                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
 F_threshold: 1.0        # ransac threshold (pixel)
 show_track: 1           # publish tracking image as topic
 equalize: 1             # if image is too dark or light, trun on equalize to find enough features
@@ -74,15 +63,15 @@ max_num_iterations: 8   # max solver itrations, to guarantee real time
 keyframe_parallax: 10.0 # keyframe selection threshold (pixel)
 
 #imu parameters       The more accurate parameters you provide, the better performance
-#acc_n: 0.2          # accelerometer measurement noise standard deviation. #0.2   0.04
-#gyr_n: 0.02         # gyroscope measurement noise standard deviation.     #0.05  0.004
-#acc_w: 0.0002         # accelerometer bias random work noise standard deviation.  #0.02
-#gyr_w: 2.0e-5       # gyroscope bias random work noise standard deviation.     #4.0e-5
+acc_n: 0.1          # accelerometer measurement noise standard deviation. #0.2   0.04
+gyr_n: 0.01         # gyroscope measurement noise standard deviation.     #0.05  0.004
+acc_w: 0.001         # accelerometer bias random work noise standard deviation.  #0.02
+gyr_w: 0.0001       # gyroscope bias random work noise standard deviation.     #4.0e-5
 
-acc_n: 1  # accelerometer measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.005
-gyr_n: 0.77459666923  # gyroscope measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.003
-acc_w: 0.00002236067  # accelerometer bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance=1.0e-7 
-gyr_w: 0.00002236067  # gyroscope bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance =1.0e-7
+  #acc_n: 1  # accelerometer measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.005
+  #gyr_n: 0.77459666923  # gyroscope measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.003
+  #acc_w: 0.00002236067  # accelerometer bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance=1.0e-7 
+  #gyr_w: 0.00002236067  # gyroscope bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance =1.0e-7
 g_norm: 9.81007     # gravity magnitude
 
 #loop closure parameters

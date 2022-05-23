@@ -1,17 +1,17 @@
 %YAML:1.0
 
-# Config file for airsim simulation
+# Config file for flightmare simulation
 
 #common parameters
-imu_topic: "/airsim_node/PX4/imu/Imu"
-image_topic: "/airsim_node/PX4/camera_1/Scene"
+imu_topic: "/hummingbird/imu"
+image_topic: "/rgb"
 output_path: "/home/huynhmink/vins_mono_output/"
 
 #camera calibration 
 model_type: PINHOLE
 camera_name: camera
-image_width: 720
-image_height: 480
+image_width: 640
+image_height: 360
 distortion_parameters:
    k1: 0
    k2: 0
@@ -22,15 +22,14 @@ distortion_parameters:
    #p1: 5.333e-05
    #p2: -1.578e-04
 projection_parameters:
-  #   fx: 4.616e+02
-  #   fy: 4.603e+02
-  #   cx: 3.630e+02
-  #   cy: 2.481e+02
-   fx: 360 
-   fy: 360
-   cx: 360
-   cy: 240
-  #luc truoc loi o day dien sai @HIEU
+   #fx: 4.616e+02
+   #fy: 4.603e+02
+   #cx: 3.630e+02
+   #cy: 2.481e+02
+   fx: 180 
+   fy: 320
+   cx: 320
+   cy: 180
 
 # Extrinsic parameter between IMU and Camera.
 estimate_extrinsic: 1   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
@@ -42,10 +41,9 @@ extrinsicRotation: !!opencv-matrix
    rows: 3
    cols: 3
    dt: d
-   data: [1, 0, 0,
-     0, 0, -1, 
-         0 , 1, 0]
-#Translation from camera frame to imu frame, imu^T_cam
+   data: [  1,  0,  0,
+      0, 0,  1,
+      0,  -1, 0 ]
 extrinsicTranslation: !!opencv-matrix
    rows: 3
    cols: 1
@@ -53,7 +51,7 @@ extrinsicTranslation: !!opencv-matrix
    data: [0,0,0]
 
 #feature traker paprameters
-max_cnt: 200            # max feature number in feature tracking
+max_cnt: 150            # max feature number in feature tracking
 min_dist: 30            # min distance between two features 
 freq: 0                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
 F_threshold: 1.0        # ransac threshold (pixel)
@@ -72,15 +70,10 @@ gyr_n: 0.02         # gyroscope measurement noise standard deviation.     #0.05 
 acc_w: 0.0002         # accelerometer bias random work noise standard deviation.  #0.02
 gyr_w: 2.0e-5       # gyroscope bias random work noise standard deviation.     #4.0e-5
 
-#acc_n: 1  # accelerometer measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)
-#gyr_n: 0.77459666923  # gyroscope measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)
-#acc_w: 0.00002236067  # accelerometer bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency) 
-#gyr_w: 0.00002236067  # gyroscope bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)
-
-#acc_n: 2.0e-03          # accelerometer measurement noise standard deviation. #0.2   0.04
-#gyr_n: 1.7e-04         # gyroscope measurement noise standard deviation.     #0.05  0.004
-#acc_w: 3.0e-3         # accelerometer bias random work noise standard deviation.  #0.02
-#gyr_w: 1.9393e-5       # gyroscope bias random work noise standard deviation.     #4.0e-5
+  #acc_n: 1  # accelerometer measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.005
+  #gyr_n: 0.77459666923  # gyroscope measurement noise standard deviation. = sqrt(variance)/sqrt(1/imu_frequency)   variance=0.003
+  #acc_w: 0.00002236067  # accelerometer bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance=1.0e-7 
+  #gyr_w: 0.00002236067  # gyroscope bias random work noise standard deviation. = sqrt(variance)*sqrt(1/imu_frequency)   variance =1.0e-7
 g_norm: 9.81007     # gravity magnitude
 
 #loop closure parameters
@@ -91,7 +84,7 @@ pose_graph_save_path: "/home/huynhmink/vins_mono_output/pose_graph/" # save and 
 
 #unsynchronization parameters
 estimate_td: 0                      # online estimate time offset between camera and imu
-td: 0.0                            # initial value of time offset. unit: s. readed image clock + td = real image clock (IMU clock)
+td: 0.0                           # initial value of time offset. unit: s. readed image clock + td = real image clock (IMU clock)
 
 #rolling shutter parameters
 rolling_shutter: 0                  # 0: global shutter camera, 1: rolling shutter camera
