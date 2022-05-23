@@ -1,0 +1,12 @@
+Tutorial to run VINSMONO with AIRSIM
+
+Run VINSMONO:
+
+roslaunch vins_estimator euroc.launch config_file:=airsim.yaml
+roslaunch vins_estimator vins_rviz.launch
+
+Run transformation package:
+
+rosrun read_topic vio_tranform
+
+Run AIRSIM simulation

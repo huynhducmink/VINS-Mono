@@ -10,7 +10,7 @@ output_path: "/home/huynhmink/vins_mono_output/"
 #camera calibration 
 model_type: PINHOLE
 camera_name: camera
-image_width: 720
+image_width: 640
 image_height: 480
 distortion_parameters:
    k1: 0
@@ -28,7 +28,7 @@ projection_parameters:
   #   cy: 2.481e+02
    fx: 360 
    fy: 360
-   cx: 360
+   cx: 320
    cy: 240
   #luc truoc loi o day dien sai @HIEU
 
@@ -53,9 +53,9 @@ extrinsicTranslation: !!opencv-matrix
    data: [0,0,0]
 
 #feature traker paprameters
-max_cnt: 200            # max feature number in feature tracking
+max_cnt: 100            # max feature number in feature tracking
 min_dist: 30            # min distance between two features 
-freq: 0                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
+freq: 10                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
 F_threshold: 1.0        # ransac threshold (pixel)
 show_track: 1           # publish tracking image as topic
 equalize: 1             # if image is too dark or light, trun on equalize to find enough features
