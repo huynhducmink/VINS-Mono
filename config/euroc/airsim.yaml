@@ -26,8 +26,8 @@ projection_parameters:
   #   fy: 4.603e+02
   #   cx: 3.630e+02
   #   cy: 2.481e+02
-   fx: 360 
-   fy: 360
+   fx: 320 
+   fy: 320
    cx: 320
    cy: 240
   #luc truoc loi o day dien sai @HIEU
@@ -84,7 +84,7 @@ gyr_w: 2.0e-5       # gyroscope bias random work noise standard deviation.     #
 g_norm: 9.81007     # gravity magnitude
 
 #loop closure parameters
-loop_closure: 1                    # start loop closure
+loop_closure: 0                    # start loop closure
 load_previous_pose_graph: 0        # load and reuse previous pose graph; load from 'pose_graph_save_path'
 fast_relocalization: 0             # useful in real-time and large project
 pose_graph_save_path: "/home/huynhmink/vins_mono_output/pose_graph/" # save and load path
